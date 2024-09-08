@@ -27,6 +27,7 @@ pip3 install -r requirements.txt
 This will install the packages from the requirements.txt for this project.
 '''
 
+# postgresql://blog_post_ijzw_user:WxJmGbq0VRXgNtGqLWcvE8wkFPZ3PL3w@dpg-cresar2j1k6c73dfug6g-a/blog_post_ijzw
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
@@ -56,7 +57,7 @@ gravatar = Gravatar(app,
 # CREATE DATABASE
 class Base(DeclarativeBase):
     pass
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('db_url', 'sqlite:///posts.db')
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
